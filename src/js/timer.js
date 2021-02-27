@@ -1,11 +1,3 @@
-// ссылки
-const refs = {
-  days: document.querySelector('[data-value="days"]'),
-  hours: document.querySelector('[data-value="hours"]'),
-  mins: document.querySelector('[data-value="mins"]'),
-  secs: document.querySelector('[data-value="secs"]'),
-};
-
 // класс-конструктор
 class CountdownTimer {
   constructor({ selector, targetDate }) {
@@ -33,6 +25,14 @@ class CountdownTimer {
     );
     const mins = this.pad(Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)));
     const secs = this.pad(Math.floor((time % (1000 * 60)) / 1000));
+
+    // ссылки с учетом конкретного div с его #id
+    const refs = {
+      days: document.querySelector(`${this.selector} [data-value="days"]`),
+      hours: document.querySelector(`${this.selector} [data-value="hours"]`),
+      mins: document.querySelector(`${this.selector} [data-value="mins"]`),
+      secs: document.querySelector(`${this.selector} [data-value="secs"]`),
+    };
 
     // добавляем в HTML данные
     refs.days.textContent = days;
