@@ -3,6 +3,14 @@ class CountdownTimer {
   constructor({ selector, targetDate }) {
     this.selector = selector;
     this.targetDate = targetDate;
+
+    // ссылки с учетом конкретного div с его #id
+    this.refs = {
+      days: document.querySelector(`${this.selector} [data-value="days"]`),
+      hours: document.querySelector(`${this.selector} [data-value="hours"]`),
+      mins: document.querySelector(`${this.selector} [data-value="mins"]`),
+      secs: document.querySelector(`${this.selector} [data-value="secs"]`),
+    };
   }
 
   start() {
@@ -26,19 +34,11 @@ class CountdownTimer {
     const mins = this.pad(Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)));
     const secs = this.pad(Math.floor((time % (1000 * 60)) / 1000));
 
-    // ссылки с учетом конкретного div с его #id
-    const refs = {
-      days: document.querySelector(`${this.selector} [data-value="days"]`),
-      hours: document.querySelector(`${this.selector} [data-value="hours"]`),
-      mins: document.querySelector(`${this.selector} [data-value="mins"]`),
-      secs: document.querySelector(`${this.selector} [data-value="secs"]`),
-    };
-
     // добавляем в HTML данные
-    refs.days.textContent = days;
-    refs.hours.textContent = hours;
-    refs.mins.textContent = mins;
-    refs.secs.textContent = secs;
+    this.refs.days.textContent = days;
+    this.refs.hours.textContent = hours;
+    this.refs.mins.textContent = mins;
+    this.refs.secs.textContent = secs;
   }
 
   // ф-я добавления к числу нуля впереди числаю если длина числа меньше 2
